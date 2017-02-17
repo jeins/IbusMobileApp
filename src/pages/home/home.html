@@ -15,3 +15,25 @@
     update any existing page or create new pages.
   </p>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar text-center color="primary">
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-only>
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-only [navPush]="inputPage">
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-only [navPush]="historyPage">
+          <ion-icon name="home"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

@@ -4,16 +4,14 @@ import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
 import { InputPage } from '../pages/input/input';
-import { HistoryPage } from '../pages/history/history';
-import { TabsPage } from '../pages/tabs/tabs';
+import { HistoryPage } from '../pages/history/history'
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     InputPage,
-    HistoryPage,
-    TabsPage
+    HistoryPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,8 +21,7 @@ import { TabsPage } from '../pages/tabs/tabs';
     MyApp,
     HomePage,
     InputPage,
-    HistoryPage,
-    TabsPage
+    HistoryPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
