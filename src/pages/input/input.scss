@@ -1,3 +1,28 @@
-page-input {
+$img-backgroud-color: #5C97BF;
+$icon-color: #E8F5E9;
 
+page-input {
+  .input-btn-save{
+    width: 100%;
+  }
+  .item-md, ion-grid, ion-col{
+    padding-left: 0px;
+  }
+  .input-image{
+    font-size: 100px;
+    text-align: center;
+    background-color: $img-backgroud-color;
+    border-radius: 5px;
+    color: $icon-color;
+  }
+
+  .input-image-bill{
+    font-size: 50px;
+    text-align: center;
+    min-height: 50px;
+    max-height: 100px;
+    background-color: $img-backgroud-color;
+    border-radius: 5px;
+    color: $icon-color;
+  }
 }
