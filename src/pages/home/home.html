@@ -1,37 +1,75 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="displayMenu($event)" end>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content class="card-background-page">
+
+  <ion-card>
+    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
+    <ion-card-content>
+      <ion-card-title style="text-align: center">
+        Nine Inch Nails Live
+      </ion-card-title>
+    </ion-card-content>
+
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-left>
+          50€
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-left>
+          <button ion-button small>Small</button>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card>
+    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
+    <ion-card-content>
+      <ion-card-title style="text-align: center">
+        Nine Inch Nails Live
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
+    <ion-card-content>
+      <ion-card-title style="text-align: center">
+        Nine Inch Nails Live
+      </ion-card-title>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
+    <ion-card-content>
+      <ion-card-title style="text-align: center">
+        Nine Inch Nails Live
+      </ion-card-title>
+    </ion-card-content>
+
+  </ion-card>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar text-center color="primary">
     <ion-row>
       <ion-col>
-        <button ion-button icon-only>
-          <ion-icon name="home"></ion-icon>
+        <button ion-button color="light" clear [navPush]="inputPage" style="font-size: 30px">
+          <ion-icon name="camera"></ion-icon>
         </button>
       </ion-col>
       <ion-col>
-        <button ion-button icon-only [navPush]="inputPage">
-          <ion-icon name="home"></ion-icon>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-only [navPush]="historyPage">
-          <ion-icon name="home"></ion-icon>
+        <button ion-button color="light" clear [navPush]="historyPage" style="font-size: 30px">
+          <ion-icon name="folder-open"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
