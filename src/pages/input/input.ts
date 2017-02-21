@@ -1,12 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 
-/*
- Generated class for the Input page.
+import { ProductService } from '../../providers/product-service';
+import { Category } from '../../providers/category';
 
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
     selector: 'page-input',
     templateUrl: 'input.html'
@@ -14,14 +11,35 @@ import {NavController, NavParams} from 'ionic-angular';
 export class InputPage {
     isAddBillImage: boolean;
     product: Object;
+    loadCategories: String[] = [];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, private productService: ProductService, private category: Category) {
+        this.productService = productService;
         this.isAddBillImage = false;
-        this.product = {name: '', description: '', purchasePrice: {currency: 'euro'}, sellingPrice: {currency: 'rupiah'}}
+        this.product = {name: '', description: '', purchasePrice: {currency: 'euro'}, sellingPrice: {currency: 'rupiah'}};
+        this.loadCategories = category.getCategory()
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad InputPage');
     }
 
+    onSaveInput() : void{
+        let toast = this.toastCtrl.create({
+            message: 'Berhasil menambahkan product baru',
+            duration: 1000,
+            position: 'top'
+        });
+
+        toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+
+        this.productService
+            .addNewProduct(this.product)
+            .subscribe(product => {
+                console.log(product);
+                toast.present();
+            });
+    }
 }

@@ -1,7 +1,6 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "IbusMobileApp",
+  "author": "Muhammad Juan Akbar",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -40,5 +39,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "ionic2: An Ionic project"
+  "description": "ibus mobile apps"
 }

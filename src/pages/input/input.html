@@ -55,7 +55,7 @@
                 <ion-col width-70>
                     <ion-item>
                         <ion-label floating>Purchase Price</ion-label>
-                        <ion-input type="text" [(ngModel)]="product.purchasePrice.price"></ion-input>
+                        <ion-input type="number" [(ngModel)]="product.purchasePrice.price"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -75,7 +75,7 @@
                 <ion-col width-70>
                     <ion-item>
                         <ion-label floating>Selling Price</ion-label>
-                        <ion-input type="text" [(ngModel)]="product.sellingPrice.price"></ion-input>
+                        <ion-input type="number" [(ngModel)]="product.sellingPrice.price"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -84,7 +84,7 @@
         <!--description-->
         <ion-item>
             <ion-label floating>Description</ion-label>
-            <ion-textarea [(ngModel)]="product.description"></ion-textarea>
+            <ion-textarea rows="5" [(ngModel)]="product.description"></ion-textarea>
         </ion-item>
 
         <!--upload bil-->
@@ -110,7 +110,7 @@
 <ion-footer>
     <ion-row baseline>
         <ion-col width-100>
-            <button ion-button color="secondary" class="input-btn-save">Save</button>
+            <button ion-button color="secondary" class="input-btn-save" (click)="onSaveInput()">Save</button>
         </ion-col>
     </ion-row>
 </ion-footer>
