@@ -1,3 +1,30 @@
-page-show {
+@import "../input/input";
 
+page-show {
+  .product-image{
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+  }
+
+  .toolbar {
+    .toolbar-background {
+      background: transparent;
+      color: #fff;
+    }
+  }
+
+  .header-md::after{
+    border: 0px !important;
+    border-bottom-color: transparent !important;
+    background-image: none !important;
+    border-bottom: none !important;
+  }
+
+  .scroll-content{
+    margin-top: 240px !important;
+  }
 }

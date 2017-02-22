@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { PopoverController } from 'ionic-angular';
+import {PopoverController, NavController} from 'ionic-angular';
 
 import { InputPage } from '../input/input';
 import { HistoryPage } from '../history/history';
-import {MenuPopOverPage} from "./menuPopOver";
+import { MenuPopOverPage } from "./menuPopOver";
+import {ShowPage} from "../show/show";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class HomePage {
   inputPage = InputPage;
   historyPage = HistoryPage;
 
-  constructor(public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController) {
 
   }
 
@@ -25,4 +26,7 @@ export class HomePage {
     });
   }
 
+  showProduct(productId: string){
+    this.navCtrl.push(ShowPage, {productId})
+  }
 }
