@@ -3,10 +3,12 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
-import { MenuPopOverPage } from '../pages/home/menuPopOver';
+import { HomeMenuPage } from '../pages/home/menu';
 import { InputPage } from '../pages/input/input';
 import { HistoryPage } from '../pages/history/history';
+
 import { ShowPage } from '../pages/show/show';
+import { ShowMenuPage } from '../pages/show/menu';
 
 import { ProductService } from '../providers/product-service';
 import { Category } from '../providers/category';
@@ -14,11 +16,11 @@ import { Category } from '../providers/category';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    MenuPopOverPage,
+    HomePage, HomeMenuPage,
     InputPage,
     HistoryPage,
-    ShowPage
+    ShowPage, ShowMenuPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,11 +28,10 @@ import { Category } from '../providers/category';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    MenuPopOverPage,
+    HomePage, HomeMenuPage,
     InputPage,
     HistoryPage,
-    ShowPage
+    ShowPage, ShowMenuPage
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

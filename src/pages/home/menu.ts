@@ -11,7 +11,7 @@ import {Component} from "@angular/core";
   `
 })
 
-export class MenuPopOverPage {
+export class HomeMenuPage {
     constructor() {
     }
 }

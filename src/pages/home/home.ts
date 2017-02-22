@@ -3,7 +3,7 @@ import {PopoverController, NavController} from 'ionic-angular';
 
 import { InputPage } from '../input/input';
 import { HistoryPage } from '../history/history';
-import { MenuPopOverPage } from "./menuPopOver";
+import { HomeMenuPage } from "./menu";
 import {ShowPage} from "../show/show";
 
 
@@ -20,7 +20,7 @@ export class HomePage {
   }
 
   displayMenu(myEvent){
-    let popover = this.popoverCtrl.create(MenuPopOverPage);
+    let popover = this.popoverCtrl.create(HomeMenuPage);
     popover.present({
       ev: myEvent
     });

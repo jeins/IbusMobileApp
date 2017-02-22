@@ -1,5 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, NavParams, Navbar} from 'ionic-angular';
+import {NavController, NavParams, Navbar, PopoverController} from 'ionic-angular';
+
+import { ShowMenuPage } from './menu';
 
 @Component({
     selector: 'page-show',
@@ -10,7 +12,7 @@ export class ShowPage {
     productId: String;
     product: Object;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
         this.productId = navParams.get('productId');
 
         this.getProduct();
@@ -40,4 +42,10 @@ export class ShowPage {
         };
     }
 
+    displayMenu(myEvent){
+        let popover = this.popoverCtrl.create(ShowMenuPage);
+        popover.present({
+            ev: myEvent
+        });
+    }
 }
