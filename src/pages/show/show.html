@@ -9,7 +9,7 @@
     </ion-navbar>
 
     <div class="product-image">
-        <img src="http://id-live-01.slatic.net/p/7/fossil-sydney-satchel-camel-4225-2453398-34235f02419369d6279d8aa886f30550-webp-catalog_233.jpg"/>
+        <img src="{{product?.image}}"/>
     </div>
 
 </ion-header>
@@ -19,37 +19,37 @@
     <ion-list>
         <ion-item>
             <ion-label>Code</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.code"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.code}}"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Name</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.name"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.name}}"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Category</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.category"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.category}}"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Status</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.status"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.status}}"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Sell Price</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.sellingPrice.text"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.sellingPrice.value}}"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Buy Price</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.purchasePrice.text"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.purchasePrice.value}}"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Description</ion-label>
-            <ion-input disabled="true" type="text" [(ngModel)]="product.description"></ion-input>
+            <ion-input disabled="true" type="text" value="{{product?.description}}"></ion-input>
         </ion-item>
     </ion-list>
 

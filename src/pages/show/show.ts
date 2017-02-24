@@ -3,6 +3,8 @@ import {NavController, NavParams, Navbar, PopoverController} from 'ionic-angular
 
 import { ShowMenuPage } from './menu';
 
+import { ProductService } from '../../providers/product-service';
+
 @Component({
     selector: 'page-show',
     templateUrl: 'show.html'
@@ -12,10 +14,19 @@ export class ShowPage {
     productId: String;
     product: Object;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                public popoverCtrl: PopoverController,
+                private productService: ProductService) {
         this.productId = navParams.get('productId');
 
-        this.getProduct();
+        productService.showProduct(this.productId)
+            .subscribe(product => {
+                this.product = product;
+                this.product['code'] = 'JN1231';
+
+                console.log(this.product);
+            });
     }
 
     ionViewDidLoad() {
@@ -24,22 +35,6 @@ export class ShowPage {
         this.navBar.backButtonClick = (e:UIEvent)=>{
             this.navCtrl.popToRoot();
         }
-    }
-
-    private getProduct(){
-        this.product = {
-            code: 'JN123',
-            name: 'Fossil',
-            category: 'Tas',
-            status: 'Baru',
-            sellingPrice: {
-                text: 'Rp 500.000'
-            },
-            purchasePrice: {
-                text: '€ 50'
-            },
-            description: 'Hello World'
-        };
     }
 
     displayMenu(myEvent){

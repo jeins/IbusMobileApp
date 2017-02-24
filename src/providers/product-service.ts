@@ -19,6 +19,12 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    public showProduct(productId){
+        return this.http.get(this._productApiUri + productId)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     public addNewProduct(product){
         let body = JSON.stringify(product);console.log(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
