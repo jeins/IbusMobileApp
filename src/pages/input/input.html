@@ -11,7 +11,8 @@
     <ion-row baseline>
         <ion-col width-100>
             <div class="input-image">
-                <ion-icon name="camera"></ion-icon>
+                <ion-icon *ngIf="!product.image" name="camera"></ion-icon>
+                <img *ngIf="product.image" src="{{product.image}}">
             </div>
         </ion-col>
     </ion-row>
@@ -55,7 +56,7 @@
                 <ion-col width-70>
                     <ion-item>
                         <ion-label floating>Purchase Price</ion-label>
-                        <ion-input type="number" [(ngModel)]="product.purchasePrice.price"></ion-input>
+                        <ion-input type="number" [(ngModel)]="product.purchasePrice.value"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -75,7 +76,7 @@
                 <ion-col width-70>
                     <ion-item>
                         <ion-label floating>Selling Price</ion-label>
-                        <ion-input type="number" [(ngModel)]="product.sellingPrice.price"></ion-input>
+                        <ion-input type="number" [(ngModel)]="product.sellingPrice.value"></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>

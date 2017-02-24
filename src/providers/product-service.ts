@@ -19,18 +19,34 @@ export class ProductService {
             .catch(this.handleError);
     }
 
-    public showProduct(productId){
+    public getProductById(productId){
         return this.http.get(this._productApiUri + productId)
             .map(res => res.json())
             .catch(this.handleError);
     }
 
+    public updateProduct(productId, newProductData){
+        let body = JSON.stringify(newProductData);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this._productApiUri + 'update/' + productId, body, options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     public addNewProduct(product){
-        let body = JSON.stringify(product);console.log(body);
+        let body = JSON.stringify(product);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this._productApiUri + 'add', body, options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    public remove(productId){
+        return this.http.delete(this._productApiUri + 'delete/' + productId)
             .map(res => res.json())
             .catch(this.handleError);
     }

@@ -20,7 +20,7 @@ export class ShowPage {
                 private productService: ProductService) {
         this.productId = navParams.get('productId');
 
-        productService.showProduct(this.productId)
+        productService.getProductById(this.productId)
             .subscribe(product => {
                 this.product = product;
                 this.product['code'] = 'JN1231';
