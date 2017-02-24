@@ -11,52 +11,32 @@
 
 <ion-content class="card-background-page">
 
-  <ion-card>
-    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
+  <ion-card *ngFor="let product of products">
+    <img src="{{product.image}}"/>
     <ion-card-content>
-      <ion-card-title style="text-align: center" (click)="showProduct('13123')">
-        Nine Inch Nails Live
+      <ion-card-title style="text-align: center" (click)="showProduct(product.id)">
+        {{product.name}}
       </ion-card-title>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col>
         <button ion-button clear small color="danger" icon-left>
-          50€
+          {{product.sellingPrice.value}}
         </button>
       </ion-col>
       <ion-col text-right>
         <button ion-button clear small color="danger" icon-left>
-          <button ion-button small>Small</button>
+          <button ion-button small>{{product.status}}</button>
         </button>
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-card>
-    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
-    <ion-card-content>
-      <ion-card-title style="text-align: center">
-        Nine Inch Nails Live
-      </ion-card-title>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
-    <ion-card-content>
-      <ion-card-title style="text-align: center">
-        Nine Inch Nails Live
-      </ion-card-title>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <img src="https://ionicframework.com/dist/preview-app/www/assets/img/nin-live.png"/>
-    <ion-card-content>
-      <ion-card-title style="text-align: center">
-        Nine Inch Nails Live
-      </ion-card-title>
-    </ion-card-content>
 
-  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="loadMoreProduct($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
 
 <ion-footer>

@@ -13,8 +13,8 @@ export class ProductService {
         this._productApiUri = 'http://localhost:3000/product/';
     }
 
-    public getProducts(){
-        return this.http.get(this._productApiUri + 'list')
+    public getProducts(limit, currentPage){
+        return this.http.get(this._productApiUri + 'list/' + limit + '/' + currentPage )
             .map(res => res.json())
             .catch(this.handleError);
     }
