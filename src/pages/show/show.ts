@@ -38,7 +38,7 @@ export class ShowPage {
     }
 
     displayMenu(myEvent){
-        let popover = this.popoverCtrl.create(ShowMenuPage);
+        let popover = this.popoverCtrl.create(ShowMenuPage, {productId: this.productId});
         popover.present({
             ev: myEvent
         });
