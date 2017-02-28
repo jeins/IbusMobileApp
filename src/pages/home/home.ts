@@ -49,8 +49,6 @@ export class HomePage {
           });
         });
 
-
-      console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);
   }

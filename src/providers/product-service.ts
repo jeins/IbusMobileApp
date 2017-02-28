@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from "rxjs";
+import _ from 'lodash';
 
 @Injectable()
 export class ProductService {
@@ -10,18 +11,18 @@ export class ProductService {
     constructor(public http: Http) {
         console.log('Hello ProductService Provider');
         this.http = http;
-        this._productApiUri = 'http://localhost:3000/product/';
+        this._productApiUri = 'http://ibus.mjuan.me/product/';
     }
 
     public getProducts(limit, currentPage){
         return this.http.get(this._productApiUri + 'list/' + limit + '/' + currentPage )
-            .map(res => res.json())
+            .map(res => this.checkProductData(res.json()))
             .catch(this.handleError);
     }
 
     public getProductById(productId){
         return this.http.get(this._productApiUri + productId)
-            .map(res => res.json())
+            .map(res => this.checkProductData(res.json()))
             .catch(this.handleError);
     }
 
@@ -54,5 +55,23 @@ export class ProductService {
     private handleError(error) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
+    }
+
+    private checkProductData(objs){
+        let checkImageAvailable = (obj)=>{
+            if(_.hasIn(obj, 'image') && obj.image == ''){
+                obj.image = 'http://ibus.mjuan.me/image/no-image/jpg';
+            }
+        };
+
+        if(_.isArray(objs)){
+            _.forEach(objs, (obj)=>{
+                checkImageAvailable(obj);
+            });
+        } else{
+            checkImageAvailable(objs);
+        }
+console.log(objs);
+        return objs;
     }
 }

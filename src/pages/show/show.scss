@@ -1,4 +1,6 @@
 @import "../input/input";
+$img-backgroud-color: #5C97BF;
+$icon-color: #E8F5E9;
 
 page-show {
   .product-image{
@@ -25,6 +27,6 @@ page-show {
   }
 
   .scroll-content{
-    margin-top: 240px !important;
+    margin-top: 255px !important;
   }
 }

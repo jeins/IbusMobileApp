@@ -10,9 +10,9 @@
 <ion-content padding>
     <ion-row baseline>
         <ion-col width-100>
-            <div class="input-image">
-                <ion-icon *ngIf="!product.image" name="camera"></ion-icon>
-                <img *ngIf="product.image" src="{{product.image}}">
+            <div class="input-image" (click)="presentActionSheet()">
+                <ion-icon [hidden]="lastImage !== null" name="camera"></ion-icon>
+                <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
             </div>
         </ion-col>
     </ion-row>
