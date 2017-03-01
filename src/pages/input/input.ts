@@ -33,7 +33,7 @@ export class InputPage {
         this.productId = navParams.get('productId');
         this.productService = productService;
         this.isAddBillImage = false;
-        this.product = {name: '', description: '', purchasePrice: {currency: 'euro'}, sellingPrice: {currency: 'rupiah'}};
+        this.product = {name: '', description: '', image: null, purchasePrice: {currency: 'euro'}, sellingPrice: {currency: 'rupiah'}};
         this.loadCategories = category.getCategory();
         this.isEdit = !!(this.productId);
 
@@ -152,6 +152,8 @@ export class InputPage {
     private copyFileToLocalDir(namePath, currentName, newFileName) {
         File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
             this.lastImage = newFileName;
+            this.product['image'] = newFileName;
+            this.uploadImage();
         }, error => {
             this.presentToast('Error while storing file.');
         });
@@ -190,7 +192,7 @@ export class InputPage {
             fileName: filename,
             chunkedMode: false,
             mimeType: "multipart/form-data",
-            params : {'fileName': filename}
+            httpMethod: 'POST'
         };
 
         const fileTransfer = new Transfer();
