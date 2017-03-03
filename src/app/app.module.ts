@@ -10,8 +10,13 @@ import { HistoryPage } from '../pages/history/history';
 import { ShowPage } from '../pages/show/show';
 import { ShowMenuPage } from '../pages/show/menu';
 
+import { OrderCustomerPage } from '../pages/order/customer/customer';
+import { OrderProductPage } from '../pages/order/product/product';
+
 import { ProductService } from '../providers/product-service';
 import { Category } from '../providers/category';
+import { Customer } from '../providers/customer';
+import { Order } from "../providers/order";
 
 @NgModule({
   declarations: [
@@ -19,8 +24,8 @@ import { Category } from '../providers/category';
     HomePage, HomeMenuPage,
     InputPage,
     HistoryPage,
-    ShowPage, ShowMenuPage
-
+    ShowPage, ShowMenuPage,
+    OrderCustomerPage, OrderProductPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -31,11 +36,12 @@ import { Category } from '../providers/category';
     HomePage, HomeMenuPage,
     InputPage,
     HistoryPage,
-    ShowPage, ShowMenuPage
+    ShowPage, ShowMenuPage,
+    OrderCustomerPage, OrderProductPage
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
-      ProductService, Category
+      ProductService, Category, Customer, Order
   ]
 })
 export class AppModule {}

@@ -3,7 +3,7 @@ import {PopoverController, NavController} from 'ionic-angular';
 import _ from 'lodash';
 
 import { InputPage } from '../input/input';
-import { HistoryPage } from '../history/history';
+import { OrderCustomerPage } from '../order/customer/customer';
 import { HomeMenuPage } from './menu';
 import {ShowPage} from '../show/show';
 
@@ -15,7 +15,7 @@ import { ProductService } from '../../providers/product-service';
 })
 export class HomePage {
   inputPage = InputPage;
-  historyPage = HistoryPage;
+  orderCustomerPage = OrderCustomerPage;
   public products: Object[] = [];
   private currentPage;
 
