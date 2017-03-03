@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Data Pembeli</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="customer" (ngSubmit)="onSave()">
+    <!--name-->
+    <ion-item>
+      <ion-label floating >Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <!--alamat-->
+    <ion-item>
+      <ion-label floating >Address</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+
+    <!--postcode-->
+    <ion-item>
+      <ion-label floating >Postcode</ion-label>
+      <ion-input type="number" formControlName="postcode"></ion-input>
+    </ion-item>
+
+    <!--phoneNumber-->
+    <ion-item>
+      <ion-label floating >Phone Number</ion-label>
+      <ion-input type="text" formControlName="phoneNumber"></ion-input>
+    </ion-item>
+
+  </form>
+</ion-content>
+
+
+<ion-footer>
+  <ion-row baseline>
+    <ion-col width-100>
+      <button ion-button type="submit" style="width: 100%" [disabled]="!customer.valid" (click)="onSave()">Save</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
