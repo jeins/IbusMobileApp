@@ -4,6 +4,7 @@ import {NavController, NavParams, Navbar, PopoverController} from 'ionic-angular
 import { ShowMenuPage } from './menu';
 
 import { ProductService } from '../../providers/product-service';
+import {OrderProductPage} from "../order/product/product";
 
 @Component({
     selector: 'page-show',
@@ -42,5 +43,9 @@ export class ShowPage {
         popover.present({
             ev: myEvent
         });
+    }
+
+    onOrderProduct(){
+        this.navCtrl.push(OrderProductPage, {productId: this.productId});
     }
 }

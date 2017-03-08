@@ -9,7 +9,7 @@
     </ion-navbar>
 
     <div class="product-image">
-        <img src="{{product?.image}}"/>
+        <img src="{{product?.image}}" style="max-height: 300px"/>
     </div>
 
 </ion-header>
@@ -54,7 +54,7 @@
     </ion-list>
 
     <ion-fab center bottom>
-        <button ion-fab >
+        <button ion-fab (click)="onOrderProduct()">
             <ion-icon name="cart"></ion-icon>
         </button>
     </ion-fab>

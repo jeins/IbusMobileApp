@@ -1,4 +1,7 @@
 page-home {
+  ion-card img{
+    max-height: 255px;
+  }
   .home-footer{
     ion-col{
       flex: 0 0 25%;

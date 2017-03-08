@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Search Product
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list radio-group>
+        <ion-item *ngFor="let product of products" (click)="onSelected(product.id)">
+            <ion-avatar item-left>
+                <img src="{{product.image}}">
+            </ion-avatar>
+            <h2>{{product.name}}</h2>
+            <p>{{product.status}} - {{product.sellingPrice.text}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

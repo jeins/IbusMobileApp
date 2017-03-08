@@ -22,164 +22,26 @@
           <ion-label >Order Product</ion-label>
         </ion-col>
         <ion-col width-50>
-          <button ion-button outline item-right icon-left>
+          <button ion-button outline item-right icon-left (click)="displayProductList()">
             <ion-icon name="add"></ion-icon>
             Add Product
           </button>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="selectedProducts?.length > 0">
         <ion-col width-100>
           <ion-list>
             <ion-list-header>
               Selected Product
             </ion-list-header>
 
-            <ion-item-sliding>
-              <ion-item>
-                <ion-avatar item-left>
-                  <img src="https://ionicframework.com/dist/preview-app/www/assets/img/venkman.jpg">
-                </ion-avatar>
-                <h2>Venkman</h2>
-                <p>Back off man, I'm a scientist.</p>
-              </ion-item>
-              <ion-item-options>
-                <button ion-button color="light" icon-left>
-                  <ion-icon name="ios-more"></ion-icon>
-                  More
-                </button>
-                <button ion-button color="primary" icon-left>
-                  <ion-icon name="text"></ion-icon>
-                  Text
-                </button>
-                <button ion-button color="secondary" icon-left>
-                  <ion-icon name="call"></ion-icon>
-                  Call
-                </button>
-              </ion-item-options>
-            </ion-item-sliding>
-
-
-            <ion-item-sliding>
-              <ion-item>
-                <ion-avatar item-left>
-                  <img src="https://ionicframework.com/dist/preview-app/www/assets/img/spengler.jpg">
-                </ion-avatar>
-                <h2>Egon</h2>
-                <p>We're gonna go full stream.</p>
-              </ion-item>
-              <ion-item-options>
-                <button ion-button color="light" icon-left>
-                  <ion-icon name="ios-more"></ion-icon>
-                  More
-                </button>
-                <button ion-button color="primary" icon-left>
-                  <ion-icon name="text"></ion-icon>
-                  Text
-                </button>
-                <button ion-button color="secondary" icon-left>
-                  <ion-icon name="call"></ion-icon>
-                  Call
-                </button>
-              </ion-item-options>
-            </ion-item-sliding>
-
-            <ion-item-sliding>
-              <ion-item>
-                <ion-avatar item-left>
-                  <img src="https://ionicframework.com/dist/preview-app/www/assets/img/stantz.jpg">
-                </ion-avatar>
-                <h2>Ray</h2>
-                <p>Ugly little spud, isn't he?</p>
-              </ion-item>
-              <ion-item-options>
-                <button ion-button color="light" icon-left>
-                  <ion-icon name="ios-more"></ion-icon>
-                  More
-                </button>
-                <button ion-button color="primary" icon-left>
-                  <ion-icon name="text"></ion-icon>
-                  Text
-                </button>
-                <button ion-button color="secondary" icon-left>
-                  <ion-icon name="call"></ion-icon>
-                  Call
-                </button>
-              </ion-item-options>
-            </ion-item-sliding>
-
-            <ion-item-sliding>
-              <ion-item>
-                <ion-avatar item-left>
-                  <img src="https://ionicframework.com/dist/preview-app/www/assets/img/winston.jpg">
-                </ion-avatar>
-                <h2>Winston</h2>
-                <p>That's a big Twinkie.</p>
-              </ion-item>
-              <ion-item-options>
-                <button ion-button color="light" icon-left>
-                  <ion-icon name="ios-more"></ion-icon>
-                  More
-                </button>
-                <button ion-button color="primary" icon-left>
-                  <ion-icon name="text"></ion-icon>
-                  Text
-                </button>
-                <button ion-button color="secondary" icon-left>
-                  <ion-icon name="call"></ion-icon>
-                  Call
-                </button>
-              </ion-item-options>
-            </ion-item-sliding>
-
-            <ion-item-sliding>
-              <ion-item>
-                <ion-avatar item-left>
-                  <img src="https://ionicframework.com/dist/preview-app/www/assets/img/tully.jpg">
-                </ion-avatar>
-                <h2>Tully</h2>
-                <p>Okay, who brought the dog?</p>
-              </ion-item>
-              <ion-item-options>
-                <button ion-button color="light" icon-left>
-                  <ion-icon name="ios-more"></ion-icon>
-                  More
-                </button>
-                <button ion-button color="primary" icon-left>
-                  <ion-icon name="text"></ion-icon>
-                  Text
-                </button>
-                <button ion-button color="secondary" icon-left>
-                  <ion-icon name="call"></ion-icon>
-                  Call
-                </button>
-              </ion-item-options>
-            </ion-item-sliding>
-
-            <ion-item-sliding>
-              <ion-item>
-                <ion-avatar item-left>
-                  <img src="https://ionicframework.com/dist/preview-app/www/assets/img/barrett.jpg">
-                </ion-avatar>
-                <h2>Dana</h2>
-                <p>I am The Gatekeeper!</p>
-              </ion-item>
-              <ion-item-options>
-                <button ion-button color="light" icon-left>
-                  <ion-icon name="ios-more"></ion-icon>
-                  More
-                </button>
-                <button ion-button color="primary" icon-left>
-                  <ion-icon name="text"></ion-icon>
-                  Text
-                </button>
-                <button ion-button color="secondary"icon-left >
-                  <ion-icon name="call"></ion-icon>
-                  Call
-                </button>
-              </ion-item-options>
-            </ion-item-sliding>
-
+            <ion-item *ngFor="let product of selectedProducts">
+              <ion-avatar item-left>
+                <img src="{{product.image}}">
+              </ion-avatar>
+              <h2>{{product.name}}</h2>
+              <p>{{product.status}} - {{product.sellingPrice.text}}</p>
+            </ion-item>
           </ion-list>
         </ion-col>
       </ion-row>

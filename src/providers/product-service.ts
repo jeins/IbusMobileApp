@@ -20,6 +20,16 @@ export class ProductService {
             .catch(this.handleError);
     }
 
+    public getProductWithFilter(params){
+        let body = JSON.stringify(params);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this._productApiUri + 'filter', body, options)
+            .map(res => this.checkProductData(res.json()))
+            .catch(this.handleError);
+    }
+
     public getProductById(productId){
         return this.http.get(this._productApiUri + productId)
             .map(res => this.checkProductData(res.json()))
