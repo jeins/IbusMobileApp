@@ -4,7 +4,7 @@ import {NavController, NavParams, Navbar, PopoverController} from 'ionic-angular
 import { ShowMenuPage } from './menu';
 
 import { ProductService } from '../../providers/product-service';
-import {OrderProductPage} from "../order/product/product";
+import {OrderCustomerPage} from "../order/customer/customer";
 
 @Component({
     selector: 'page-show',
@@ -46,6 +46,6 @@ export class ShowPage {
     }
 
     onOrderProduct(){
-        this.navCtrl.push(OrderProductPage, {productId: this.productId});
+        this.navCtrl.push(OrderCustomerPage, {productId: this.productId});
     }
 }

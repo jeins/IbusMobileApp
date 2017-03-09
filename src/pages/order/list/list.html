@@ -1,0 +1,21 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>list</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-grid>
+        <ion-row *ngFor="let prodRow of products">
+            <ion-col width-50 *ngFor="let prod of prodRow">
+                <img [src]="prod.image" style="height: 250px"/>
+                <p>{{prod.name}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

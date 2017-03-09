@@ -5,6 +5,7 @@ import {ProductService} from "../../../providers/product-service";
 import {Order} from '../../../providers/order';
 import {OrderProductListPage} from "./list";
 import {HomePage} from "../../home/home";
+import {OrderListPage} from "../list/list";
 
 @Component({
     selector: 'page-product',
@@ -84,7 +85,7 @@ export class OrderProductPage {
         });
 
         toast.onDidDismiss(() => {
-            this.navCtrl.push(HomePage);
+            this.navCtrl.push(OrderListPage);
         });
 
         this.orderService.add(newOrder)
