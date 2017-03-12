@@ -2,6 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {NavController, NavParams, Navbar} from 'ionic-angular';
 import {Order} from "../../../providers/order";
 
+import {OrderListShowPage} from "./show";
+
 
 @Component({
     selector: 'page-order-list',
@@ -9,7 +11,7 @@ import {Order} from "../../../providers/order";
 })
 export class OrderListPage {
     @ViewChild(Navbar) navBar: Navbar;
-    private products: Object[] = [];
+    private products: Object[];
     private currentPage;
 
     constructor(public navCtrl: NavController,
@@ -17,6 +19,7 @@ export class OrderListPage {
                 private orderService: Order) {
 
         this.currentPage = 1;
+        this.products = [];
 
         orderService.list(6, this.currentPage)
             .subscribe(results => {
@@ -37,6 +40,13 @@ export class OrderListPage {
         this.navBar.backButtonClick = (e: UIEvent) => {
             this.navCtrl.popToRoot();
         }
+    }
+
+    showDetailProduct(productId){
+        this.orderService.getByProduct(productId)
+            .subscribe(order => {
+                this.navCtrl.push(OrderListShowPage, {order: order});
+            });
     }
 
     private setupProductToGrid(products) {

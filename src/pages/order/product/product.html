@@ -61,7 +61,7 @@
         </ion-col>
         <ion-col width-40>
           <ion-item>
-            <ion-input type="number" formControlName="shippingPriceValue"></ion-input>
+            <ion-input type="number" formControlName="shippingPriceValue" (input)="changeTotalPrice($event.target.value, false)"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -81,7 +81,7 @@
         </ion-col>
         <ion-col width-40>
           <ion-item>
-            <ion-input type="number" formControlName="discountValue"></ion-input>
+            <ion-input type="number" formControlName="discountValue" (input)="changeTotalPrice($event.target.value, true)"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -101,7 +101,7 @@
         </ion-col>
         <ion-col width-40>
           <ion-item>
-            <ion-input type="number" formControlName="totalPriceValue"></ion-input>
+            <ion-input type="number" formControlName="totalPriceValue" disabled="true"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -112,6 +112,33 @@
       <ion-label>Lunas</ion-label>
       <ion-toggle formControlName="paidFinished"></ion-toggle>
     </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50 [hidden]="product.value.paidFinished">
+          <ion-row>
+            <ion-label>Bon DP 1</ion-label>
+          </ion-row>
+          <ion-row>
+            <button ion-button small>Upload</button>
+          </ion-row>
+          <ion-row>
+            <button ion-button small>View</button>
+          </ion-row>
+        </ion-col>
+        <ion-col width-50>
+          <ion-row>
+            <ion-label>Bon Lunas</ion-label>
+          </ion-row>
+          <ion-row>
+            <button fab-center ion-button small>Upload</button>
+          </ion-row>
+          <ion-row>
+            <button fab-center ion-button small>View</button>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
   </form>
 </ion-content>

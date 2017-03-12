@@ -11,7 +11,7 @@
 
     <ion-grid>
         <ion-row *ngFor="let prodRow of products">
-            <ion-col width-50 *ngFor="let prod of prodRow">
+            <ion-col width-50 *ngFor="let prod of prodRow" (click)="showDetailProduct(prod.id)">
                 <img [src]="prod.image" style="height: 250px"/>
                 <p>{{prod.name}}</p>
             </ion-col>

@@ -46,6 +46,6 @@ export class ShowPage {
     }
 
     onOrderProduct(){
-        this.navCtrl.push(OrderCustomerPage, {productId: this.productId});
+        this.navCtrl.push(OrderCustomerPage, {productId: JSON.stringify([this.productId])});
     }
 }

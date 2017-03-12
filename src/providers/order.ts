@@ -29,6 +29,18 @@ export class Order {
             .catch(this.handleError);
     }
 
+    get(orderId){
+        return this.http.get(this.orderApiUri + orderId)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    getByProduct(productId){
+        return this.http.get(this.orderApiUri + 'product/' + productId)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     private handleError(error) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

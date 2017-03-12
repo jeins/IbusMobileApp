@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
+
 import {ProductService} from "../../../providers/product-service";
 import {Order} from '../../../providers/order';
+
 import {OrderProductListPage} from "./list";
-import {HomePage} from "../../home/home";
 import {OrderListPage} from "../list/list";
 
 @Component({
@@ -16,6 +17,7 @@ export class OrderProductPage {
     private productId: string;
     private customerId: string;
     private selectedProductsId: string[] = [];
+    private totalPriceFromProducts: number;
 
     public selectedProducts: Object[];
 
@@ -28,21 +30,41 @@ export class OrderProductPage {
 
         this.productId = navParams.get('productId');
         this.customerId = navParams.get('customerId');
-        this.product = this.formBuilder.group({
+        let order = navParams.get('order');
+        let formParams = {
             totalPriceCurrency: ['rupiah', Validators.required],
-            totalPriceValue: ['', Validators.required],
+            totalPriceValue: [0, Validators.required],
             shippingPriceCurrency: ['rupiah', Validators.required],
-            shippingPriceValue: ['', Validators.required],
+            shippingPriceValue: [0, Validators.required],
             discountCurrency: ['rupiah', Validators.required],
-            discountValue: ['', Validators.required],
+            discountValue: [0, Validators.required],
             paidFinished: [false, Validators.required]
-        });
+        };
+console.log(order);
+console.log(this.customerId);
+console.log(this.productId);
+        if(order){
+            this.selectedProducts = order.Product;
+            this.selectedProductsId = order.productId;
+            this.customerId = order.customerId;
 
-        if (this.productId) {
-            this.selectedProductsId.push(this.productId);
+            formParams.totalPriceCurrency[0] = order.totalPrice.currency;
+            formParams.totalPriceValue[0] = order.totalPrice.value;
+            formParams.shippingPriceCurrency[0] = order.shippingPrice.currency;
+            formParams.shippingPriceValue[0] = order.shippingPrice.value;
+            formParams.discountCurrency[0] = order.discount.currency;
+            formParams.discountValue[0] = order.discount.value;
+            formParams.paidFinished[0] = order.paidFinished;
+        }else{
+            if (this.productId) {
+                this.selectedProductsId = JSON.parse(this.productId);
+            }
+
+            this.totalPriceFromProducts = 0;
+            this.displaySelectedProduct();
         }
 
-        this.displaySelectedProduct();
+        this.product = this.formBuilder.group(formParams);
     }
 
     displaySelectedProduct() {
@@ -51,6 +73,11 @@ export class OrderProductPage {
             this.productService.getProductWithFilter(params)
                 .subscribe(products => {
                     this.selectedProducts = products;
+
+                    for(let i=0; i<products.length; i++){
+                        this.totalPriceFromProducts += Number(products[i].sellingPrice.value);
+                    }
+                    this.changeTotalPrice(0, false);
                 });
         }
     }
@@ -60,24 +87,39 @@ export class OrderProductPage {
     }
 
     displayProductList() {
-        let params = {};
+        let params = {
+            'customerId': this.customerId
+        };
         if(this.selectedProductsId){
-            params['selectedProductsId'] = this.selectedProductsId;
+            params['selectedProductsId'] = JSON.stringify(this.selectedProductsId);
         }
         this.navCtrl.push(OrderProductListPage, params);
+    }
+
+    changeTotalPrice(val, isMinus){console.log(val)
+        if(isMinus){
+            this.totalPriceFromProducts -= Number(val);
+        } else{
+            this.totalPriceFromProducts += Number(val);
+        }
+
+        this.product.value.totalPriceValue = this.totalPriceFromProducts.toString();
+        console.log(this.totalPriceFromProducts);
+
+        console.log(this.product)
     }
 
     onSave() {
         let orderForm = this.product.value;
         let newOrder = {
-            userId: this.customerId,
+            customerId: this.customerId,
             productId: JSON.stringify(this.selectedProductsId),
             shippingPrice: JSON.stringify({currency: orderForm.shippingPriceCurrency, value: orderForm.shippingPriceValue}),
             discount: JSON.stringify({currency: orderForm.discountCurrency, value: orderForm.discountValue}),
             totalPrice: JSON.stringify({currency: orderForm.totalPriceCurrency, value: orderForm.totalPriceValue}),
             paidFinished: orderForm.paidFinished
         };
-
+console.log(newOrder);
         let toast = this.toastCtrl.create({
             message: 'order berhasil disave!',
             duration: 1000,

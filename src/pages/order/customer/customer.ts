@@ -36,16 +36,16 @@ export class OrderCustomerPage {
 
     this.customerService
       .register(this.customer.value)
-      .subscribe(customerId => {
-        console.log(customerId);
+      .subscribe(customer => {
+        console.log(customer);
         let params = {
-          customerId: customerId
+          customerId: customer.id
         };
 
         if(this.productId) {
           params['productId'] = this.productId;
         }
-
+console.log(params);
         this.navCtrl.push(OrderProductPage, params);
       });
   }

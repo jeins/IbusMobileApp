@@ -1,0 +1,43 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>list</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card>
+        <ion-item>
+            <ion-avatar item-left>
+                <ion-icon name="person"></ion-icon>
+            </ion-avatar>
+            <h2>{{order.Customer.name}}</h2>
+        </ion-item>
+
+        <img src="{{order.image}}">
+
+        <ion-card-content>
+            <p>{{order.Product.category}} - {{order.Product.status}}</p>
+            <br>
+            <p>{{order.Product.description}}</p>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small (click)="showDetailOrder()">
+                    <ion-icon name="eye"></ion-icon>
+                    <div>View Detail</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <ion-note>
+                    {{order.createdAt | date: 'dd.MM.yyyy'}}
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+</ion-content>
