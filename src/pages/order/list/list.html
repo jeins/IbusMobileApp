@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>list</ion-title>
+        <ion-title>Order List</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -12,10 +12,14 @@
     <ion-grid>
         <ion-row *ngFor="let prodRow of products">
             <ion-col width-50 *ngFor="let prod of prodRow" (click)="showDetailProduct(prod.id)">
-                <img [src]="prod.image" style="height: 250px"/>
+                <img [src]="prod.image" style="height: 250px; width: 100%"/>
                 <p>{{prod.name}}</p>
             </ion-col>
         </ion-row>
     </ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="loadMoreOrderedProduct($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

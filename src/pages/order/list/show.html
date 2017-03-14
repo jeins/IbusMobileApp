@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>list</ion-title>
+        <ion-title>Order Detail</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -12,12 +12,13 @@
     <ion-card>
         <ion-item>
             <ion-avatar item-left>
-                <ion-icon name="person"></ion-icon>
+                <ion-icon name="person" style="font-size: 45px"></ion-icon>
             </ion-avatar>
             <h2>{{order.Customer.name}}</h2>
+            <p>{{order.Customer.address}}</p>
         </ion-item>
 
-        <img src="{{order.image}}">
+        <img src="{{order.Product.image}}">
 
         <ion-card-content>
             <p>{{order.Product.category}} - {{order.Product.status}}</p>
@@ -33,9 +34,9 @@
                 </button>
             </ion-col>
             <ion-col>
-                <ion-note>
-                    {{order.createdAt | date: 'dd.MM.yyyy'}}
-                </ion-note>
+                <button ion-button clear>
+                    Order On: {{order.createdAt | date: 'dd.MM.yyyy'}}
+                </button>
             </ion-col>
         </ion-row>
     </ion-card>

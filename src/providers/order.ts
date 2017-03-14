@@ -41,6 +41,16 @@ export class Order {
             .catch(this.handleError);
     }
 
+    update(orderId, newOrderData){
+        let body = JSON.stringify(newOrderData);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this.orderApiUri + orderId, body, options)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
     private handleError(error) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

@@ -15,9 +15,10 @@ import {OrderListPage} from "../list/list";
 export class OrderProductPage {
     private product: FormGroup;
     private productId: string;
-    private customerId: string;
+    private customer;
     private selectedProductsId: string[] = [];
     private totalPriceFromProducts: number;
+    private orderId: string;
 
     public selectedProducts: Object[];
 
@@ -29,7 +30,8 @@ export class OrderProductPage {
                 private productService: ProductService) {
 
         this.productId = navParams.get('productId');
-        this.customerId = navParams.get('customerId');
+        this.customer = navParams.get('customer');
+        this.orderId = navParams.get('orderId');
         let order = navParams.get('order');
         let formParams = {
             totalPriceCurrency: ['rupiah', Validators.required],
@@ -41,12 +43,13 @@ export class OrderProductPage {
             paidFinished: [false, Validators.required]
         };
 console.log(order);
-console.log(this.customerId);
+console.log(this.customer);
 console.log(this.productId);
         if(order){
             this.selectedProducts = order.Product;
             this.selectedProductsId = order.productId;
-            this.customerId = order.customerId;
+            this.customer = order.Customer;
+            this.orderId = order.id;
 
             formParams.totalPriceCurrency[0] = order.totalPrice.currency;
             formParams.totalPriceValue[0] = order.totalPrice.value;
@@ -88,10 +91,13 @@ console.log(this.productId);
 
     displayProductList() {
         let params = {
-            'customerId': this.customerId
+            'customer': this.customer
         };
         if(this.selectedProductsId){
             params['selectedProductsId'] = JSON.stringify(this.selectedProductsId);
+        }
+        if(this.orderId){
+            params['orderId'] = this.orderId;
         }
         this.navCtrl.push(OrderProductListPage, params);
     }
@@ -112,7 +118,7 @@ console.log(this.productId);
     onSave() {
         let orderForm = this.product.value;
         let newOrder = {
-            customerId: this.customerId,
+            customerId: this.customer.id,
             productId: JSON.stringify(this.selectedProductsId),
             shippingPrice: JSON.stringify({currency: orderForm.shippingPriceCurrency, value: orderForm.shippingPriceValue}),
             discount: JSON.stringify({currency: orderForm.discountCurrency, value: orderForm.discountValue}),
@@ -129,12 +135,21 @@ console.log(newOrder);
         toast.onDidDismiss(() => {
             this.navCtrl.push(OrderListPage);
         });
-
-        this.orderService.add(newOrder)
-            .subscribe(success => {
-            if(success){
-                toast.present();
-            }
-        });
+console.log(this.orderId);
+        if(this.orderId){
+            this.orderService.update(this.orderId, newOrder)
+                .subscribe(success => {
+                    if(success){
+                        toast.present();
+                    }
+                });
+        } else{
+            this.orderService.add(newOrder)
+                .subscribe(success => {
+                    if(success){
+                        toast.present();
+                    }
+                });
+        }
     }
 }

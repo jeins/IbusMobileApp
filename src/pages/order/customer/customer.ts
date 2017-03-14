@@ -39,7 +39,7 @@ export class OrderCustomerPage {
       .subscribe(customer => {
         console.log(customer);
         let params = {
-          customerId: customer.id
+          customer: customer
         };
 
         if(this.productId) {

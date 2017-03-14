@@ -12,14 +12,12 @@ import {OrderProductPage} from "./product";
 export class OrderProductListPage {
     private products;
     private selectedProductsId: string[] = [];
-    private customerId: string;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private productService: ProductService) {
 
         this.selectedProductsId = JSON.parse(navParams.get('selectedProductsId'));
-        this.customerId = navParams.get('customerId');
 
         this.initData();
     }
@@ -34,8 +32,9 @@ export class OrderProductListPage {
     onSelected(productId){
         this.selectedProductsId.push(productId);
         this.navCtrl.push(OrderProductPage ,{
-            customerId: this.customerId,
-            productId: JSON.stringify(this.selectedProductsId)
+            customer: this.navParams.get('customer'),
+            productId: JSON.stringify(this.selectedProductsId),
+            orderId: this.navParams.get('orderId')
         });
     }
 

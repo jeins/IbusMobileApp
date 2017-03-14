@@ -141,4 +141,18 @@
     </ion-grid>
 
   </form>
+
+  <ion-list>
+    <ion-list-header>Customer Info</ion-list-header>
+    <ion-item>
+      <ion-avatar item-left>
+        <ion-icon name="person" style="font-size: 45px"></ion-icon>
+      </ion-avatar>
+      <h2>{{customer.name}}</h2>
+      <h3>{{customer.phoneNumber}}</h3>
+      <p>{{customer.address}} - {{customer.postcode}}</p>
+    </ion-item>
+    <ion-item></ion-item>
+  </ion-list>
+
 </ion-content>

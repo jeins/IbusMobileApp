@@ -49,6 +49,26 @@ export class OrderListPage {
             });
     }
 
+    loadMoreOrderedProduct(infiniteScroll){
+        this.currentPage++;
+
+        setTimeout(() => {
+            this.orderService.list(6, this.currentPage)
+                .subscribe(results => {
+                    let products = [];
+                    for(let i=0; i<results.length; i++){
+                        let tmp = results[i]['Product'];
+
+                        for(let j=0; j<tmp.length; j++) products.push(tmp[j]);
+                    }
+                    console.log(products);
+                    this.setupProductToGrid(products);
+                });
+
+            infiniteScroll.complete();
+        }, 500);
+    }
+
     private setupProductToGrid(products) {
         let tmpArr = [];
         let index = 0;
@@ -56,11 +76,9 @@ export class OrderListPage {
 
         for (let i = 0; i < products.length; i++) {
             if (i !== 0 && i % 2 == 0) {
+                this.products.push(tmpArr);
                 index = 0;
                 tmpArr = [];
-
-                this.products[prodIndex] = tmpArr;
-                prodIndex++;
             }
 
             tmpArr[index] = products[i];
