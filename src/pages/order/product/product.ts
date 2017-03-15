@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+    NavController, NavParams, ToastController, LoadingController, Platform,
+    ActionSheetController, ModalController
+} from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 
 import {ProductService} from "../../../providers/product-service";
@@ -7,6 +10,9 @@ import {Order} from '../../../providers/order';
 
 import {OrderProductListPage} from "./list";
 import {OrderListPage} from "../list/list";
+
+import {ImageHandler} from '../../../helper/image-handler';
+import {OrderProductImageModalPage} from "./image-modal";
 
 @Component({
     selector: 'page-product',
@@ -21,18 +27,29 @@ export class OrderProductPage {
     private orderId: string;
 
     public selectedProducts: Object[];
+    public firstPaymentImageHandler: ImageHandler;
+    public endPaymentImageHandler: ImageHandler;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public toastCtrl: ToastController,
                 private formBuilder: FormBuilder,
                 private orderService: Order,
-                private productService: ProductService) {
+                private productService: ProductService,
+                public actionSheetCtrl: ActionSheetController,
+                public platform: Platform,
+                public loadingCtrl: LoadingController,
+                public modalCtrl: ModalController
+    ) {
 
         this.productId = navParams.get('productId');
         this.customer = navParams.get('customer');
         this.orderId = navParams.get('orderId');
         let order = navParams.get('order');
+
+        this.firstPaymentImageHandler = new ImageHandler(toastCtrl, actionSheetCtrl, platform, loadingCtrl);
+        this.endPaymentImageHandler = new ImageHandler(toastCtrl, actionSheetCtrl, platform, loadingCtrl);
+
         let formParams = {
             totalPriceCurrency: ['rupiah', Validators.required],
             totalPriceValue: [0, Validators.required],
@@ -42,14 +59,14 @@ export class OrderProductPage {
             discountValue: [0, Validators.required],
             paidFinished: [false, Validators.required]
         };
-console.log(order);
-console.log(this.customer);
-console.log(this.productId);
+
         if(order){
             this.selectedProducts = order.Product;
             this.selectedProductsId = order.productId;
             this.customer = order.Customer;
             this.orderId = order.id;
+            this.endPaymentImageHandler.setImageFile(order.receiptImage);
+            this.firstPaymentImageHandler.setImageFile(order.firstPaymentImageHandler);
 
             formParams.totalPriceCurrency[0] = order.totalPrice.currency;
             formParams.totalPriceValue[0] = order.totalPrice.value;
@@ -115,6 +132,11 @@ console.log(this.productId);
         console.log(this.product)
     }
 
+    displayImageModal(image){
+        let modal = this.modalCtrl.create(OrderProductImageModalPage, {image: image});
+        modal.present();
+    }
+
     onSave() {
         let orderForm = this.product.value;
         let newOrder = {
@@ -125,7 +147,15 @@ console.log(this.productId);
             totalPrice: JSON.stringify({currency: orderForm.totalPriceCurrency, value: orderForm.totalPriceValue}),
             paidFinished: orderForm.paidFinished
         };
-console.log(newOrder);
+
+        if(this.firstPaymentImageHandler.imageFileName){
+            newOrder['firstTransferImage'] = this.firstPaymentImageHandler.imageFileName;
+        }
+
+        if(this.endPaymentImageHandler.imageFileName){
+            newOrder['receiptImage'] = this.endPaymentImageHandler.imageFileName;
+        }
+
         let toast = this.toastCtrl.create({
             message: 'order berhasil disave!',
             duration: 1000,
@@ -135,7 +165,7 @@ console.log(newOrder);
         toast.onDidDismiss(() => {
             this.navCtrl.push(OrderListPage);
         });
-console.log(this.orderId);
+
         if(this.orderId){
             this.orderService.update(this.orderId, newOrder)
                 .subscribe(success => {

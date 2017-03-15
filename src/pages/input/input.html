@@ -10,9 +10,9 @@
 <ion-content padding>
     <ion-row baseline>
         <ion-col width-100>
-            <div class="input-image" (click)="presentActionSheet()">
-                <ion-icon [hidden]="product.image !== null" name="camera"></ion-icon>
-                <img src="{{pathForImage(product.image)}}" [hidden]="lastImage === null">
+            <div class="input-image" (click)="productImageHandler.presentActionSheet()">
+                <ion-icon [hidden]="productImageHandler.imageFileName !== ''" name="camera"></ion-icon>
+                <img [hidden]="productImageHandler.imageFileName === ''" [src]="productImageHandler.getImageUri()" >
             </div>
         </ion-col>
     </ion-row>
@@ -97,8 +97,9 @@
         <ion-item *ngIf="isAddBillImage">
             <ion-row baseline>
                 <ion-col width-100>
-                    <div class="input-image-bill">
-                        <ion-icon name="camera"></ion-icon>
+                    <div class="input-image-bill" (click)="billImageHandler.presentActionSheet()">
+                        <ion-icon [hidden]="billImageHandler.imageFileName !== null" name="camera"></ion-icon>
+                        <img src="{{displayBillImage()}}" [hidden]="product.billImage === null || billImageHandler.imageFileName === null">
                     </div>
                 </ion-col>
             </ion-row>

@@ -120,10 +120,10 @@
             <ion-label>Bon DP 1</ion-label>
           </ion-row>
           <ion-row>
-            <button ion-button small>Upload</button>
+            <button (click)="firstPaymentImageHandler.presentActionSheet()" ion-button small>Upload</button>
           </ion-row>
           <ion-row>
-            <button ion-button small>View</button>
+            <button [disabled]="firstPaymentImageHandler.imageFileName === ''" (click)="displayImageModal(firstPaymentImageHandler.getImageUri())" ion-button small>View</button>
           </ion-row>
         </ion-col>
         <ion-col width-50>
@@ -131,10 +131,10 @@
             <ion-label>Bon Lunas</ion-label>
           </ion-row>
           <ion-row>
-            <button fab-center ion-button small>Upload</button>
+            <button (click)="endPaymentImageHandler.presentActionSheet()" ion-button small>Upload</button>
           </ion-row>
           <ion-row>
-            <button fab-center ion-button small>View</button>
+            <button [disabled]="endPaymentImageHandler.imageFileName === ''" (click)="displayImageModal(endPaymentImageHandler.getImageUri())" ion-button small>View</button>
           </ion-row>
         </ion-col>
       </ion-row>
@@ -150,7 +150,7 @@
       </ion-avatar>
       <h2>{{customer.name}}</h2>
       <h3>{{customer.phoneNumber}}</h3>
-      <p>{{customer.address}} - {{customer.postcode}}</p>
+      <p style="white-space: initial">{{customer.address}} - {{customer.postcode}}</p>
     </ion-item>
     <ion-item></ion-item>
   </ion-list>

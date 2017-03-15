@@ -15,6 +15,7 @@ import { OrderProductPage } from '../pages/order/product/product';
 import { OrderProductListPage } from '../pages/order/product/list';
 import {OrderListPage} from "../pages/order/list/list";
 import {OrderListShowPage} from "../pages/order/list/show";
+import {OrderProductImageModalPage} from "../pages/order/product/image-modal";
 
 import { ProductService } from '../providers/product-service';
 import { Category } from '../providers/category';
@@ -28,7 +29,7 @@ import { Order } from "../providers/order";
     InputPage,
     HistoryPage,
     ShowPage, ShowMenuPage,
-    OrderCustomerPage, OrderProductPage, OrderProductListPage, OrderListPage, OrderListShowPage
+    OrderCustomerPage, OrderProductPage, OrderProductListPage, OrderListPage, OrderListShowPage, OrderProductImageModalPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -40,7 +41,7 @@ import { Order } from "../providers/order";
     InputPage,
     HistoryPage,
     ShowPage, ShowMenuPage,
-    OrderCustomerPage, OrderProductPage, OrderProductListPage, OrderListPage, OrderListShowPage
+    OrderCustomerPage, OrderProductPage, OrderProductListPage, OrderListPage, OrderListShowPage, OrderProductImageModalPage
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
